@@ -8,6 +8,7 @@ const { platform } = require('os');
 function shouldUseYarn() {
   try {
     execSync('yarnpkg --version', { stdio: 'ignore' });
+    console.log('using yarn')
     return true;
   } catch (e) {
     return false;
