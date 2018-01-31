@@ -94,28 +94,29 @@ const reactScriptsLinked =
   fs.existsSync(reactScriptsPath) &&
   fs.lstatSync(reactScriptsPath).isSymbolicLink();
 
+
 // config before publish: we're in ./packages/react-scripts/config/
-if (
-  !reactScriptsLinked &&
-  __dirname.indexOf(path.join('packages', 'react-scripts', 'config')) !== -1
-) {
-  module.exports = {
-    dotenv: resolveOwn('template/.env'),
-    appPath: resolveApp('.'),
-    appBuild: resolveOwn('../../build'),
-    appPublic: resolveOwn('template/public'),
-    appHtml: resolveOwn('template/public/index.html'),
-    appIndexJs: resolveOwn('template/src/index.js'),
-    appPackageJson: resolveOwn('package.json'),
-    appSrc: resolveOwn('template/src'),
-    yarnLockFile: resolveOwn('template/yarn.lock'),
-    testsSetup: resolveOwn('template/src/setupTests.js'),
-    appNodeModules: resolveOwn('node_modules'),
-    publicUrl: getPublicUrl(resolveOwn('package.json')),
-    servedPath: getServedPath(resolveOwn('package.json')),
-    // These properties only exist before ejecting:
-    ownPath: resolveOwn('.'),
-    ownNodeModules: resolveOwn('node_modules'),
-  };
-}
+// if (
+//   !reactScriptsLinked &&
+//   __dirname.indexOf(path.join('packages', 'react-scripts', 'config')) !== -1
+// ) {
+//   module.exports = {
+//     dotenv: resolveOwn('template/.env'),
+//     appPath: resolveApp('.'),
+//     appBuild: resolveOwn('../../build'),
+//     appPublic: resolveOwn('template/public'),
+//     appHtml: resolveOwn('template/public/index.html'),
+//     appIndexJs: resolveOwn('template/src/index.js'),
+//     appPackageJson: resolveOwn('package.json'),
+//     appSrc: resolveOwn('template/src'),
+//     yarnLockFile: resolveOwn('template/yarn.lock'),
+//     testsSetup: resolveOwn('template/src/setupTests.js'),
+//     appNodeModules: resolveOwn('node_modules'),
+//     publicUrl: getPublicUrl(resolveOwn('package.json')),
+//     servedPath: getServedPath(resolveOwn('package.json')),
+//     // These properties only exist before ejecting:
+//     ownPath: resolveOwn('.'),
+//     ownNodeModules: resolveOwn('node_modules'),
+//   };
+// }
 // @remove-on-eject-end
