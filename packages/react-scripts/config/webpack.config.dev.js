@@ -168,6 +168,7 @@ module.exports = {
             options: {
               // @remove-on-eject-begin
               babelrc: false,
+              plugins: ['react-hot-loader/babel'],
               presets: [require.resolve('babel-preset-react-app')],
               // @remove-on-eject-end
               // This is a feature of `babel-loader` for webpack (not Babel itself).

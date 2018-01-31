@@ -10,6 +10,50 @@
 
 const spawn = require('react-dev-utils/crossSpawn');
 const args = process.argv.slice(2);
+// const spawnProcess = (scriptName, args) => {
+
+//   const argss = Object.keys(args).map((key) => {
+//     return (args[key]) ? `--${key} ${args[key]}` : `--${key}` ;
+//   });
+
+//   const result = spawn.sync(
+//     'node',
+//     [ require.resolve(`../scripts/${scriptName}.js`) ].concat(argss),
+//     { stdio: 'inherit' }
+//   );
+
+//   if (result.signal) {
+//     if (result.signal === 'SIGKILL') {
+//       console.log(
+//         'The build failed because the process exited too early. ' +
+//           'This probably means the system ran out of memory or someone called ' +
+//           '`kill -9` on the process.'
+//       );
+//     } else if (result.signal === 'SIGTERM') {
+//       console.log(`The build failed because the process exited too early. Someone might have called \`kill\` or \`killall\`, or the system could be shutting down.`);
+//     }
+//     process.exit(1);
+//   }
+//   process.exit(result.status);
+// }
+// require('yargs') // eslint-disable-line
+//   .command('start', 'start webpack-dev-server', (yargs) => {
+//     yargs.positional('port', {
+//         describe: 'port to bind on',
+//         default: 3000
+//     });
+//   }, (argv) => {
+//     spawnProcess('start', argv)
+//   })
+
+//   .command('build', 'build webpack', (yargs) => {}, (args) => {
+//     spawnProcess('build');
+//   })
+//   // .option('verbose', {
+//   //   alias: 'v',
+//   //   default: true
+//   // })
+//   .argv
 
 const scriptIndex = args.findIndex(
   x => x === 'build' || x === 'eject' || x === 'start' || x === 'test'
@@ -38,9 +82,7 @@ switch (script) {
         );
       } else if (result.signal === 'SIGTERM') {
         console.log(
-          'The build failed because the process exited too early. ' +
-            'Someone might have called `kill` or `killall`, or the system could ' +
-            'be shutting down.'
+          `The build failed because the process exited too early. Someone might have called \`kill\` or \`killall\`, or the system could be shutting down.`
         );
       }
       process.exit(1);
