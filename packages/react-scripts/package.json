@@ -1,6 +1,6 @@
 {
   "name": "cra-scripts",
-  "version": "1.0.5",
+  "version": "1.0.8",
   "description": "Configuration and scripts for Create React App.",
   "repository": "facebookincubator/create-react-app",
   "license": "MIT",
