@@ -14,6 +14,7 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 const InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 // const WatchMissingNodeModulesPlugin = require('react-dev-utils/WatchMissingNodeModulesPlugin');
 // const eslintFormatter = require('react-dev-utils/eslintFormatter');
 const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
@@ -183,14 +184,26 @@ module.exports = {
           // "style" loader turns CSS into JS modules that inject <style> tags.
           // In production, we use a plugin to extract that CSS to a file, but
           // in development "style" loader enables hot editing of CSS.
+        //   {
+        //     test: /\.(css|scss)$/,
+        //     include: path.resolve(__dirname, 'src'),
+        //     use: ['css-hot-loader'].concat(
+        //       ExtractTextPlugin.extract({
+        //         fallback: 'style-loader',
+        //         use: ['css-loader', 'sass-loader']
+        //       })
+        //     )
+        //   },
           {
-            test: /\.css$/,
+            test: /\.(scss|css)$/,
             use: [
               require.resolve('style-loader'),
               {
                 loader: require.resolve('css-loader'),
                 options: {
-                  importLoaders: 1,
+                  importLoaders: 2,
+                //   modules: true,
+                  localIdentName: '[name]__[local]___[hash:base64:5]'
                 },
               },
               {
@@ -213,6 +226,7 @@ module.exports = {
                   ],
                 },
               },
+              require.resolve('sass-loader')
             ],
           },
           // {
@@ -233,6 +247,31 @@ module.exports = {
           // In production, they would get copied to the `build` folder.
           // This loader doesn't use a "test" so it will catch all modules
           // that fall through the other loaders.
+
+          {
+            test: /\.html$/,
+            use: ['html-loader']
+          },
+          {
+            test: /\.(jpg|png|ico)$/,
+            include: path.resolve(__dirname, 'src'),
+            use: [
+              {
+                loader: 'file-loader',
+                options: { name: '[name].[ext]', outputPath: 'assets/images/' }
+              }
+            ]
+          },
+          {
+            test: /\.(ttf|eot|svg|woff(2)?)(\?[a-z0-9=&.]+)?$/,
+            include: path.resolve(__dirname, 'src'),
+            use: [
+              {
+                loader: 'file-loader',
+                options: { name: '[name].[ext]', outputPath: 'assets/fonts/' }
+              }
+            ]
+          },
           {
             // Exclude `js` files to keep "css" loader working as it injects
             // its runtime that would otherwise processed through "file" loader.
